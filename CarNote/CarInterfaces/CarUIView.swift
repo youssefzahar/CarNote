@@ -64,7 +64,7 @@ struct cardcar : View {
 
     var body: some View {
         
-        HStack {
+       /* HStack {
             /*AnimatedImage(image: URL(string: image)!).resizable().frame(width: 60, height: 60).clipShape(Circle()).shadow(radius: 20)*/
             VStack{
             
@@ -75,10 +75,62 @@ struct cardcar : View {
 
             }
 
+        }*/
+        
+  
+    
+
+    ZStack(alignment: .topLeading){
+        ZStack(alignment: .bottom){
+            
+            VStack(alignment: .leading){
+                Image("logo")
+                    .resizable()
+                    .cornerRadius(20)
+                    .frame(width: 250)
+                    .scaledToFit()
+                Text(modele)
+                    .bold()
+                Text(type)
+                Text(marque)
+                Text(immatricule)
+    
+            }
+            .padding()
+            .frame(width: 280 , alignment: .leading)
+            .background(.ultraThinMaterial)
+            .cornerRadius(20)
         }
+        .frame(width: 400, height: 200)
+        .shadow(radius: 3)
+        
+        Button{
+            
+            
+        }label: {
+            Image(systemName: "plus")
+                .padding(10)
+                .foregroundColor(.white)
+                .background(.blue)
+                .cornerRadius(50)
+                .padding()
+                .offset(x:300)
+               
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
     
+    }
     
     
 }

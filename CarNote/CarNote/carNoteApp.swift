@@ -13,7 +13,7 @@ struct carNoteApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginScreenView()
+            ShowProduct()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

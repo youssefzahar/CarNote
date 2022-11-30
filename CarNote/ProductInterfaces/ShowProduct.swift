@@ -12,9 +12,12 @@ import SwiftyJSON
 
 struct ShowProduct: View {
     @ObservedObject var obs = Observer()
+   
 
     var body: some View {
         NavigationView{
+
+        
             List(obs.datas){
                 i in
                 NavigationLink(destination:  DetailProduct(productItem: i)){
@@ -22,14 +25,15 @@ struct ShowProduct: View {
                 label: do {
                     card(title: i.title, image: i.image, description: i.description, prix: i.prix)
                     }
-
+                    
                     
                 }
                 
-            }.navigationTitle("Products")
+            }.navigationTitle("Products") 
         }
     }
 }
+
 
 struct ShowProduct_Previews: PreviewProvider {
     static var previews: some View {
@@ -40,7 +44,7 @@ struct ShowProduct_Previews: PreviewProvider {
 class Observer : ObservableObject {
     @Published var datas = [datatype]()
     init(){
-        AF.request("http://172.17.11.209:3000/api/product").responseData {
+        AF.request("http://172.17.5.247:3000/api/product").responseData {
             (data) in
             let json = try! JSON(data: data.data!)
             for i in json ["response"] {
@@ -69,20 +73,62 @@ struct card : View {
     var prix = 0
     var body: some View {
         
-        HStack {
-            /*AnimatedImage(image: URL(string: image)!).resizable().frame(width: 60, height: 60).clipShape(Circle()).shadow(radius: 20)*/
+        
+        /*AnimatedImage(image: URL(string: image)!).resizable().frame(width: 60, height: 60).clipShape(Circle()).shadow(radius: 20)*/
+        
+        
+        /* Text(title).fontWeight(.heavy)
+         Text(description).fontWeight(.heavy)
+         Text("\(prix)DT")*/
+        
+        
+        ZStack(alignment: .topLeading){
+            ZStack(alignment: .bottom){
+                
+                VStack(alignment: .leading){
+                    Image("P5")
+                        .resizable()
+                        .cornerRadius(20)
+                        .frame(width: 180)
+                        .scaledToFit()
+                    Text(title)
+                        .bold()
+                    Text(description)
+                    Text("\(prix)DT")
+                }
+                .padding()
+                .frame(width: 180 , alignment: .leading)
+                .background(.ultraThinMaterial)
+                .cornerRadius(20)
+            }
+            .frame(width: 180, height: 250)
+            .shadow(radius:20)
+            
+            Button{
+                
+                
+            }label: {
+                Image(systemName: "plus")
+                    .padding(10)
+                    .foregroundColor(.white)
+                    .background(.blue)
+                    .cornerRadius(50)
+                    .padding()
+                
+                
+            }
             
             
-            Text(title).fontWeight(.heavy)
-            Text(description).fontWeight(.heavy)
-            Text("\(prix)DT")
-
-
-
+            
+            
+            
+            
+            
+            
+            
         }
         
+        
+        
     }
-    
-    
-    
 }
